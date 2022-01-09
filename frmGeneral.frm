@@ -2,15 +2,15 @@ VERSION 5.00
 Begin VB.Form frmGeneral 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Configurar Config.Init "
-   ClientHeight    =   1365
+   ClientHeight    =   1335
    ClientLeft      =   45
    ClientTop       =   375
-   ClientWidth     =   4560
+   ClientWidth     =   5640
    Icon            =   "frmGeneral.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   1365
-   ScaleWidth      =   4560
+   ScaleHeight     =   1335
+   ScaleWidth      =   5640
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton cmdIndex 
       Caption         =   "Indexar Config.Init"
@@ -18,7 +18,7 @@ Begin VB.Form frmGeneral
       Left            =   120
       TabIndex        =   1
       Top             =   720
-      Width           =   4335
+      Width           =   5415
    End
    Begin VB.CommandButton cmdExtract 
       Caption         =   "Extraer Config.Init"
@@ -26,7 +26,7 @@ Begin VB.Form frmGeneral
       Left            =   120
       TabIndex        =   0
       Top             =   120
-      Width           =   4335
+      Width           =   5415
    End
 End
 Attribute VB_Name = "frmGeneral"
@@ -54,19 +54,19 @@ Private Type tConfigInit
     Recordar As Byte            ' Activado el recordar!
     
     ' Directorio
-    DirMultimedia As String     ' Directorio de multimedia
-    DirMapas As String          ' Directorio de mapas
     DirGraficos As String       ' Directorio de graficos
+    DirInterface As String      ' Directorio de interfaces
+    DirCursores As String       ' Directorio de cursores
+    DirGUI As String            ' Directorio del GUI
+    DirBotones As String        ' Directorio de botones
+    DirParticulas As String     ' Directorio de particulas
+    DirSonidos As String        ' Directorio de sonidos
+    DirMusicas As String        ' Directorio de musicas
+    DirMapas As String          ' Directorio de mapas
+    DirExtras As String         ' Directorio de extras
     DirFotos As String          ' Directorio de fotos
-    DirExtras As String         ' Directorio de extras (dentro de inits)
-    DirSonidos As String        ' Directorio de sonidos (dentro de multimedia)
-    DirMusicas As String        ' Directorio de musicas (dentro de multimedia)
-    DirParticulas As String     ' Directorio de particulas (dentro de graficos)
-    DirCursores As String       ' Directorio de cursores (dentro de graficos)
-    DirGUI As String            ' Directorio del GUI (dentro de graficos)
-    DirBotones As String        ' Directorio de botones (dentro de GUI)
-    DirFrags As String          ' Directorio de frags (dentro de fotos)
-    DirMuertes As String        ' Directorio de muertes (dentro de fotos)
+    DirFrags As String          ' Directorio de frags
+    DirMuertes As String        ' Directorio de muertes
 End Type
 
 Private Sub IniciarCabecera(ByRef Cabecera As tCabecera)
@@ -74,7 +74,7 @@ Private Sub IniciarCabecera(ByRef Cabecera As tCabecera)
 'Author: ^[GS]^
 'Last modified: 05/06/2012
 '*************************************************
-    Cabecera.Desc = "GS-Zone Argentum Online MOD - Copyright GS-Zone 2012 - info@gs-zone.org - Original by Pablo Marquez "
+    Cabecera.Desc = "GS-Zone Argentum Online MOD - Copyright GS-Zone 2022 - info@gs-zone.org - Original by Pablo Marquez "
     Cabecera.CRC = Rnd * 100
     Cabecera.MagicWord = Rnd * 10
 End Sub
@@ -83,7 +83,7 @@ End Sub
 Private Function Index()
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 25/07/2012 - ^[GS]^
+'Last modified: 09/01/2022 - ^[GS]^
 '*************************************************
 On Local Error Resume Next
 
@@ -102,17 +102,17 @@ On Local Error Resume Next
     ConfigInit.IndiceGraficos = GetVar(App.Path & "\Config.Ini", "CONFIG", "IndiceGraficos")
 
     ' DIR
-    ConfigInit.DirMultimedia = GetVar(App.Path & "\Config.Ini", "DIR", "Multimedia")
-    ConfigInit.DirMapas = GetVar(App.Path & "\Config.Ini", "DIR", "Mapas")
     ConfigInit.DirGraficos = GetVar(App.Path & "\Config.Ini", "DIR", "Graficos")
-    ConfigInit.DirFotos = GetVar(App.Path & "\Config.Ini", "DIR", "Fotos")
-    ConfigInit.DirExtras = GetVar(App.Path & "\Config.Ini", "DIR", "Extras")
-    ConfigInit.DirSonidos = GetVar(App.Path & "\Config.Ini", "DIR", "Sonidos")
-    ConfigInit.DirMusicas = GetVar(App.Path & "\Config.Ini", "DIR", "Musicas")
-    ConfigInit.DirParticulas = GetVar(App.Path & "\Config.Ini", "DIR", "Particulas")
+    ConfigInit.DirInterface = GetVar(App.Path & "\Config.Ini", "DIR", "Interface")
     ConfigInit.DirCursores = GetVar(App.Path & "\Config.Ini", "DIR", "Cursores")
     ConfigInit.DirGUI = GetVar(App.Path & "\Config.Ini", "DIR", "GUI")
     ConfigInit.DirBotones = GetVar(App.Path & "\Config.Ini", "DIR", "Botones")
+    ConfigInit.DirParticulas = GetVar(App.Path & "\Config.Ini", "DIR", "Particulas")
+    ConfigInit.DirSonidos = GetVar(App.Path & "\Config.Ini", "DIR", "Sonidos")
+    ConfigInit.DirMusicas = GetVar(App.Path & "\Config.Ini", "DIR", "Musicas")
+    ConfigInit.DirMapas = GetVar(App.Path & "\Config.Ini", "DIR", "Mapas")
+    ConfigInit.DirExtras = GetVar(App.Path & "\Config.Ini", "DIR", "Extras")
+    ConfigInit.DirFotos = GetVar(App.Path & "\Config.Ini", "DIR", "Fotos")
     ConfigInit.DirFrags = GetVar(App.Path & "\Config.Ini", "DIR", "Frags")
     ConfigInit.DirMuertes = GetVar(App.Path & "\Config.Ini", "DIR", "Muertes")
     
@@ -140,7 +140,7 @@ End Function
 Private Function Extract()
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 25/07/2012 - ^[GS]^
+'Last modified: 09/01/2022 - ^[GS]^
 '*************************************************
 On Local Error Resume Next
 
@@ -171,17 +171,17 @@ On Local Error Resume Next
     Call WriteVar(App.Path & "\Config.ini", "CONFIG", "IndiceGraficos", ConfigInit.IndiceGraficos)
     
     ' DIR
-    Call WriteVar(App.Path & "\Config.ini", "DIR", "Multimedia", ConfigInit.DirMultimedia)
-    Call WriteVar(App.Path & "\Config.ini", "DIR", "Mapas", ConfigInit.DirMapas)
     Call WriteVar(App.Path & "\Config.ini", "DIR", "Graficos", ConfigInit.DirGraficos)
-    Call WriteVar(App.Path & "\Config.ini", "DIR", "Fotos", ConfigInit.DirFotos)
-    Call WriteVar(App.Path & "\Config.ini", "DIR", "Extras", ConfigInit.DirExtras)
-    Call WriteVar(App.Path & "\Config.ini", "DIR", "Sonidos", ConfigInit.DirSonidos)
-    Call WriteVar(App.Path & "\Config.ini", "DIR", "Musicas", ConfigInit.DirMusicas)
-    Call WriteVar(App.Path & "\Config.ini", "DIR", "Particulas", ConfigInit.DirParticulas)
+    Call WriteVar(App.Path & "\Config.ini", "DIR", "Interface", ConfigInit.DirInterface)
     Call WriteVar(App.Path & "\Config.ini", "DIR", "Cursores", ConfigInit.DirCursores)
     Call WriteVar(App.Path & "\Config.ini", "DIR", "GUI", ConfigInit.DirGUI)
     Call WriteVar(App.Path & "\Config.ini", "DIR", "Botones", ConfigInit.DirBotones)
+    Call WriteVar(App.Path & "\Config.ini", "DIR", "Particulas", ConfigInit.DirParticulas)
+    Call WriteVar(App.Path & "\Config.ini", "DIR", "Sonidos", ConfigInit.DirSonidos)
+    Call WriteVar(App.Path & "\Config.ini", "DIR", "Musicas", ConfigInit.DirMusicas)
+    Call WriteVar(App.Path & "\Config.ini", "DIR", "Mapas", ConfigInit.DirMapas)
+    Call WriteVar(App.Path & "\Config.ini", "DIR", "Extras", ConfigInit.DirExtras)
+    Call WriteVar(App.Path & "\Config.ini", "DIR", "Fotos", ConfigInit.DirFotos)
     Call WriteVar(App.Path & "\Config.ini", "DIR", "Frags", ConfigInit.DirFrags)
     Call WriteVar(App.Path & "\Config.ini", "DIR", "Muertes", ConfigInit.DirMuertes)
     
