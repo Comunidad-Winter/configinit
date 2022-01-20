@@ -49,9 +49,7 @@ Private Type tConfigInit
     IndiceGraficos As String    ' Archivo de Indices de Graficos
     
     ' Usuario
-    Nombre As String            ' Nombre de usuario
-    Password As String          ' Contraseña del usuario
-    Recordar As Byte            ' Activado el recordar!
+    Token As String             ' Token de usuario
     
     ' Directorio
     DirGraficos As String       ' Directorio de graficos
@@ -117,9 +115,7 @@ On Local Error Resume Next
     ConfigInit.DirMuertes = GetVar(App.Path & "\Config.Ini", "DIR", "Muertes")
     
     ' USUARIO
-    ConfigInit.Nombre = GetVar(App.Path & "\Config.Ini", "USUARIO", "Nombre")
-    ConfigInit.Password = GetVar(App.Path & "\Config.Ini", "USUARIO", "Password")
-    ConfigInit.Recordar = Val(GetVar(App.Path & "\Config.Ini", "USUARIO", "Recordar"))
+    ConfigInit.Token = vbNullString
     
     If LenB(Dir(App.Path & "\Config.Init", vbArchive)) <> 0 Then
         Kill App.Path & "\Config.Init"
@@ -186,9 +182,7 @@ On Local Error Resume Next
     Call WriteVar(App.Path & "\Config.ini", "DIR", "Muertes", ConfigInit.DirMuertes)
     
     ' USUARIO
-    Call WriteVar(App.Path & "\Config.ini", "USUARIO", "Nombre", ConfigInit.Nombre)
-    Call WriteVar(App.Path & "\Config.ini", "USUARIO", "Password", ConfigInit.Password)
-    Call WriteVar(App.Path & "\Config.ini", "USUARIO", "Recordar", ConfigInit.Recordar)
+    Call WriteVar(App.Path & "\Config.ini", "USUARIO", "Token", ConfigInit.Token)
     
     MsgBox "Extracción completada!", vbOKOnly
 
